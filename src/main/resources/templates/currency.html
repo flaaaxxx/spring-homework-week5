@@ -17,25 +17,35 @@
 
         <div class="col-xl-2">
             <p><a href="/show-city">Weather</a></p>
-            <p><a href="/">Stock</a><p>
+            <p><a href="/">Stock</a>
+            <p>
         </div>
 
         <div class="col-xl-8">
-            <p th:text="${symbol} + '/PLN'" style="font-size: 25px;"></p>
+            <div class="row">
+                <div class="col-xl-2">
+                    <p th:text="${symbol} + '/PLN'" style="font-size: 25px;"></p>
+                </div>
+                <div class="col-xl-10">
+                    <form method="GET" th:action="@{/currency/losuj}">
+                        <button type="submit" class="btn btn-primary btn-raised">Losuj</button>
+                    </form>
+                </div>
+            </div>
 
-            <form method="GET" th:action="@{/currency/check}">
-                <div class="form-group">
-                    <label for="rates" class="bmd-label-floating">Rates</label>
-                    <input type=number step=0.0000001 class="form-control" id="rates" name="rates" required/>
+            <div class="row">
+                <div class="col-xl-6">
+                    <form method="GET" th:action="@{/currency/check}">
+                        <div class="form-group">
+                            <label for="rates" class="bmd-label-floating">Rates</label>
+                            <input type=number step=0.0000001 class="form-control" id="rates" name="rates" required/>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-raised">Check</button>
+                    </form>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-raised">Check</button>
-            </form>
-
-            <form method="GET" th:action="@{/currency/losuj}">
-                <button type="submit" class="btn btn-info btn-raised">Losuj</button>
-            </form>
-
+            </div>
         </div>
 
         <div class="col-xl-2"></div>
