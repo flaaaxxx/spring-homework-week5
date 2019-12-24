@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="shared/header :: links">
+    <title>Weather</title>
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <h1 class="col-xl-12">Weather</h1>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-xl-2">
+            <p><a href="/currency">Currency</a></p>
+            <p><a href="/">Stock</a><p>
+        </div>
+
+        <div class="col-xl-2">
+
+            <form th:action="@{/show-city}" th:object="${weather}" method="GET">
+                <div class="form-group">
+                    <label for="title" class="bmd-label-floating">City</label>
+                    <input type="text" class="form-control" id="title" th:field="*{title}" required/>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-raised">Show the weather</button>
+            </form>
+
+        </div>
+
+        <div class="col-xl-6">
+            <span th:if="${weatherDetails.getTitle()} != null">
+
+                <div id="city">
+                    <h2 th:text="${weatherDetails.getTitle()}"></h2>
+                </div>
+
+
+                    <h3>Today</h3>
+
+                    <div id="imageWeather">
+                        <img th:src="@{'https://www.metaweather.com/static/img/weather/png/64/' +
+                                        ${weatherDetails.getConsolidatedWeather().get(0).getWeatherStateAbbr()} + '.png'}" alt="img"/>
+                        <span th:text="${weatherDetails.getConsolidatedWeather().get(0).getWeatherStateName()}"></span>
+                    </div>
+
+                    <div class="divs">
+                        <h3>Temperature</h3>
+                        <p th:text="'Now ' + ${#numbers.formatDecimal(weatherDetails.getConsolidatedWeather().get(0).getTheTemp(), 0, 2, 'POINT')} + '&#186' +'C'"></p>
+                    </div>
+
+                    <div class="divs">
+                        <h3>Wind Speed</h3>
+                        <span th:text="${#numbers.formatDecimal(weatherDetails.getConsolidatedWeather().get(0).getWindSpeed(), 0, 2, 'POINT')} + 'mph'"></span>
+                        <span th:switch="${weatherDetails.getConsolidatedWeather().get(0).getWindDirectionCompass()}">
+                            <span th:case="W">&#8592;</span>
+                            <span th:case="N">&#8593;</span>
+                            <span th:case="E">&#8594;</span>
+                            <span th:case="S">&#8595;</span>
+
+                            <span th:case="NW">&#8598;</span>
+                            <span th:case="SE">&#8600;</span>
+                            <span th:case="SW">&#8601;</span>
+
+                            <span th:case="NNE">&#8599;</span>
+                            <span th:case="ENE">&#8599;</span>
+
+                            <span th:case="ESE">&#8600;</span>
+                            <span th:case="SSE">&#8600;</span>
+
+                            <span th:case="SSW">&#8601;</span>
+                            <span th:case="WSW">&#8601;</span>
+
+                            <span th:case="WNW">&#8598;</span>
+                            <span th:case="NNW">&#8598;</span>
+
+                            <span th:case="*"></span>
+
+                        </span>
+                    </div>
+
+                    <div class="divs">
+                        <h3>Humidity</h3>
+                        <p th:text="${#numbers.formatDecimal(weatherDetails.getConsolidatedWeather().get(0).getHumidity(), 0, 2, 'POINT')} + '%'"></p>
+                    </div>
+
+                    <div class="divs">
+                        <h3>Air pressure</h3>
+                        <p th:text="${#numbers.formatDecimal(weatherDetails.getConsolidatedWeather().get(0).getAirPressure(), 0, 2, 'POINT')} + 'mb'"></p>
+                    </div>
+
+            </span>
+        </div>
+        <div class="col-xl-2"></div>
+    </div>
+</div>
+
+</body>
+</html>

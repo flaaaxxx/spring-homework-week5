@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="shared/header :: links">
+    <title>Currency</title>
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <h1 class="col-xl-12">Currency</h1>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xl-2">
+            <p><a href="/show-city">Weather</a></p>
+            <p><a href="/">Stock</a><p>
+        </div>
+
+        <div class="col-xl-8">
+            <p th:text="${symbol} + '/PLN'" style="font-size: 25px;"></p>
+
+            <form method="GET" th:action="@{/currency/check}">
+                <div class="form-group">
+                    <label for="rates" class="bmd-label-floating">Rates</label>
+                    <input type=number step=0.0000001 class="form-control" id="rates" name="rates" required/>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-raised">Check</button>
+            </form>
+
+            <form method="GET" th:action="@{/currency/losuj}">
+                <button type="submit" class="btn btn-info btn-raised">Losuj</button>
+            </form>
+
+        </div>
+
+        <div class="col-xl-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12">
+            <span th:if="${status}">
+                <span th:switch="${status}">
+                    <p th:case='equals' class="status">Gratki! Udało się za <span th:text="${tries}"></span> razem!</p>
+                    <p th:case='low' class="status">Za mało</p>
+                    <p th:case='high' class="status">Za dużo</p>
+                </span>
+            </span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

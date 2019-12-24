@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="shared/header :: links">
+    <title>Stock</title>
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <h1 class="col-xl-12">Majors Indexes</h1>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xl-2">
+            <a href="/show-city">Weather</a>
+            <a href="/currency">Currency</a>
+        </div>
+
+        <div class="table-responsive col-xl-8">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="bg-info">
+                    <th scope="col" style="color: white; font-size: 20px;">Index</th>
+                    <th scope="col" style="color: white; font-size: 20px;">Price</th>
+                    <th scope="col" style="color: white; font-size: 20px;">Change</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="list : ${stockInfoList}">
+                    <td th:text="${list.getIndexName()}"></td>
+                    <td th:text="${list.getPrice()}"></td>
+                    <td th:text="${list.getChanges()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xl-2"></div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-top: 20px;
+    color: #337ab7;
+}
+
+a {
+    font-size: 30px;
+    color: dodgerblue;
+}
+
+h3 {
+    color: #337ab7;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+#city {
+    margin-bottom: 40px;
+}
+
+.divs {
+    margin-bottom: 10px;
+}
+
+#imageWeather{
+    margin-bottom: 20px;
+}
+
+.status {
+    text-align: center;
+    font-size: 30px;
+}
